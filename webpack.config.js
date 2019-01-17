@@ -17,13 +17,29 @@ module.exports = {
             loader: "html-loader"
           }
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
       }
     ]
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001'
+      }
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
     })
-  ]
+  ],
+  mode: "development"
 }
